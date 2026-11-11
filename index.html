@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#07090F" />
+  <meta name="description" content="FootPulse: baldosas piezoeléctricas que convierten cada paso en energía limpia y datos de afluencia en Bogotá." />
+  <title>FootPulse · Cada paso cuenta</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="loader" aria-hidden="true">
+    <svg viewBox="0 0 120 120" class="ld-svg">
+      <circle cx="60" cy="60" r="50" class="ld-track" />
+      <circle cx="60" cy="60" r="50" class="ld-bar" />
+      <path class="ld-bolt" d="M66 22 40 66h18l-6 32 28-46H62z" />
+    </svg>
+    <div class="ld-num"><span id="ld-pct">0</span><small>%</small></div>
+    <div class="ld-txt">Cargando energía…</div>
+  </div>
+
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div id="desk-note">Diseñada para celular · abre este enlace en tu teléfono para la mejor experiencia</div>
+
+  <div id="app">
+    <header class="topbar">
+      <a href="#/proyecto" class="brand" aria-label="FootPulse, inicio">
+        <svg viewBox="0 0 32 32" class="brand-ico"><rect x="3" y="3" width="26" height="26" rx="7"/><path d="M18 6 10 18h6l-2 8 8-12h-6z"/></svg>
+        <span>Foot<b>Pulse</b></span>
+      </a>
+      <div class="meter" aria-label="Energía generada en esta visita">
+        <span class="meter-dot"></span><span id="meter-val">0,0</span>&nbsp;J
+      </div>
+    </header>
+
+    <main id="view" tabindex="-1"></main>
+
+    <nav class="tabbar" aria-label="Secciones">
+      <a href="#/proyecto" data-r="proyecto">
+        <svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+        <span>Proyecto</span>
+      </a>
+      <a href="#/cotizar" data-r="cotizar">
+        <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 7h8M8 11h2M12 11h2M16 11h0M8 15h2M12 15h2M8 18h2M12 18h4"/></svg>
+        <span>Cotizar</span>
+      </a>
+      <a href="#/invertir" data-r="invertir">
+        <svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+        <span>Invertir</span>
+      </a>
+      <span class="tab-glow"></span>
+    </nav>
+    <div id="wipe" aria-hidden="true"><span></span><span></span><span></span></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
