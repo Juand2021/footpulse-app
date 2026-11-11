@@ -25,10 +25,16 @@ function heroFloor() {
   const cols = 7, rows = 9, s = 60;
   let t = '';
   for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) t += `<rect class="ht" data-c="${c}" data-r="${r}" x="${c * s + 3}" y="${r * s + 3}" width="${s - 6}" height="${s - 6}" rx="6"/>`;
-  return `<svg viewBox="0 0 ${cols * s} ${rows * s}">
+  // Capa de baldosas encendidas en HTML (solo opacidad: se anima en la GPU, sin repintar el SVG)
+  const lit = [];
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+    const st = `left:${((c * s + 3) / (cols * s)) * 100}%;top:${((r * s + 3) / (rows * s)) * 100}%;width:${((s - 6) / (cols * s)) * 100}%;height:${((s - 6) / (rows * s)) * 100}%`;
+    lit.push(`<i class="hl hl-g" data-c="${c}" data-r="${r}" style="${st}"></i><i class="hl hl-b" data-c="${c}" data-r="${r}" style="${st}"></i>`);
+  }
+  return `<div class="hf-plane"><svg viewBox="0 0 ${cols * s} ${rows * s}">
     <defs><radialGradient id="htg"><stop offset="0" stop-color="#2ee59d" stop-opacity=".9"/><stop offset="1" stop-color="#2ee59d" stop-opacity="0"/></radialGradient></defs>
     <style>.ht{fill:#101828;stroke:#1f2b45;stroke-width:1.5}</style>
-    ${t}<g id="fp-steps"></g></svg>`;
+    ${t}</svg><div class="hf-lit">${lit.join('')}</div></div>`;
 }
 
 export default function proyecto(root) {
@@ -212,22 +218,26 @@ export default function proyecto(root) {
 
   // ---------- HERO ----------
   const tiles = $$('.ht', root);
-  const tileAt = (c, r) => tiles.find((t) => +t.dataset.c === c && +t.dataset.r === r);
+  const litAt = (cls, c, r) => root.querySelector(`.${cls}[data-c="${c}"][data-r="${r}"]`);
   // Camino de pisadas que cruza el piso, en bucle
   const path = [[3, 8], [2, 7], [3, 6], [4, 5], [3, 4], [2, 3], [3, 2], [4, 1], [3, 0]];
   const walk = gsap.timeline({ repeat: -1, repeatDelay: 0.4, paused: true });
   path.forEach(([c, r], i) => {
-    const t = tileAt(c, r);
-    walk.to(t, { fill: '#2ee59d', stroke: '#b6ffdf', duration: 0.08 }, i * 0.32)
-      .to(t, { fill: '#163a2e', stroke: '#1f2b45', duration: 0.9, ease: 'power2.out' }, i * 0.32 + 0.1)
-      .to(t, { fill: '#101828', duration: 1.2 }, i * 0.32 + 1.0);
+    const t = litAt('hl-g', c, r);
+    walk.to(t, { opacity: 1, duration: 0.08 }, i * 0.32)
+      .to(t, { opacity: 0.22, duration: 0.9, ease: 'power2.out' }, i * 0.32 + 0.1)
+      .to(t, { opacity: 0, duration: 1.2 }, i * 0.32 + 1.0);
     // vecinos se encienden un poco (onda)
     [[c - 1, r], [c + 1, r], [c, r - 1], [c, r + 1]].forEach(([a, b]) => {
-      const n = tileAt(a, b);
-      if (n) walk.to(n, { fill: '#173048', duration: 0.12, yoyo: true, repeat: 1 }, i * 0.32 + 0.05);
+      const n = litAt('hl-b', a, b);
+      if (n) walk.to(n, { opacity: 1, duration: 0.12, yoyo: true, repeat: 1 }, i * 0.32 + 0.05);
     });
     walk.call(() => energy.add(3), null, i * 0.32);
   });
+  let walkOn = false;
+  const heroIO = new IntersectionObserver(([e]) => { if (walkOn) (e.isIntersecting ? walk.resume() : walk.pause()); });
+  heroIO.observe($('.hero', root));
+  kills.push(() => heroIO.disconnect());
   kills.push(() => walk.kill());
 
   whenReady(() => {
@@ -239,7 +249,7 @@ export default function proyecto(root) {
       .from('#hlead', { opacity: 0, y: 20, duration: 0.8 }, 0.6)
       .from('#hctas > *', { opacity: 0, y: 20, stagger: 0.08, duration: 0.6 }, 0.75)
       .from('.scroll-cue', { opacity: 0, duration: 0.6 }, 1)
-      .add(() => walk.play(), 0.6);
+      .add(() => { walkOn = true; walk.play(); }, 0.6);
   });
   const glass = $('#glassTitle', root);
   kills.push(animateGlass(glass));

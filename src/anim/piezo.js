@@ -140,9 +140,7 @@ export function buildPiezo() {
 <svg class="story-svg" viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
   <defs>
     <filter id="gl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <filter id="gl2" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="8"/></filter>
-    <filter id="soft" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="2.4"/></filter>
-    <linearGradient id="gTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a4a6e"/><stop offset="1" stop-color="#1c2640"/></linearGradient>
+            <linearGradient id="gTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a4a6e"/><stop offset="1" stop-color="#1c2640"/></linearGradient>
     <linearGradient id="gPlateTop" x1="0" y1="1" x2=".3" y2="0"><stop offset="0" stop-color="#4a5f8e"/><stop offset=".6" stop-color="#36466c"/><stop offset="1" stop-color="#28344f"/></linearGradient>
     <linearGradient id="gPlateF" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f3d5e"/><stop offset="1" stop-color="#18213a"/></linearGradient>
     <linearGradient id="gSlabTop" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#2a3550"/><stop offset="1" stop-color="#1a2238"/></linearGradient>
@@ -167,6 +165,8 @@ export function buildPiezo() {
     <linearGradient id="gAir" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bff6ff"/><stop offset="1" stop-color="#3aa0ff"/></linearGradient>
     <linearGradient id="gDbar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc0ff"/><stop offset="1" stop-color="#2a6fc2"/></linearGradient>
     <radialGradient id="gPrint" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff4b8"/><stop offset=".45" stop-color="#ffe14d" stop-opacity=".9"/><stop offset="1" stop-color="#ff8a1f" stop-opacity="0"/></radialGradient>
+    <radialGradient id="gGlowY" cx=".5" cy=".5" r=".5"><stop offset=".55" stop-color="#ffe14d" stop-opacity=".45"/><stop offset="1" stop-color="#ffe14d" stop-opacity="0"/></radialGradient>
+    <radialGradient id="gGlowG" cx=".5" cy=".5" r=".5"><stop offset=".55" stop-color="#2ee59d" stop-opacity=".45"/><stop offset="1" stop-color="#2ee59d" stop-opacity="0"/></radialGradient>
     <radialGradient id="gHalo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffe14d" stop-opacity=".55"/><stop offset="1" stop-color="#ffe14d" stop-opacity="0"/></radialGradient>
     <radialGradient id="gShadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".85"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
     <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#24304a" stroke-width="2"/></pattern>
@@ -205,8 +205,13 @@ export function buildPiezo() {
       <g class="wire-hl">
         <path d="M295 399 H329 V510"/><path d="M95 419 H61 V510"/><path d="M170 530 V551 H101"/><path d="M125 609 H245"/><path d="M290 640 V663 H196"/>
       </g>
-      <path class="wire-hot" d="M295 400 H330 V510 H240"/>
-      <path class="wire-hot" d="M95 420 H60 V510 H150"/>
+      <path class="wire-glow h1" d="M295 400 H330 V510 H240"/>
+      <path class="wire-glow h2" d="M95 420 H60 V510 H150"/>
+      <path class="wire-glow h3" d="M170 530 V552 H100 V572"/>
+      <path class="wire-glow h4" d="M125 610 H245"/>
+      <path class="wire-glow h5" d="M290 640 V664 H195 V680"/>
+      <path class="wire-hot h1" d="M295 400 H330 V510 H240"/>
+      <path class="wire-hot h2" d="M95 420 H60 V510 H150"/>
       <path class="wire-hot h3" d="M170 530 V552 H100 V572"/>
       <path class="wire-hot h4" d="M125 610 H245"/>
       <path class="wire-hot h5" d="M290 640 V664 H195 V680"/>
@@ -247,7 +252,7 @@ export function buildPiezo() {
       <g id="sensorBox">
         <rect x="262" y="427" width="16" height="7" rx="2" fill="#1a2440" stroke="#3aa0ff" stroke-width=".8"/>
       </g>
-      <circle id="sensor" cx="270" cy="430.5" r="3.4" fill="#3aa0ff" filter="url(#gl)"/>
+      <circle cx="270" cy="430.5" r="8.8" fill="#3aa0ff" opacity=".22"/><circle id="sensor" cx="270" cy="430.5" r="3.4" fill="#3aa0ff"/>
       <g id="plate">
         <polygon points="${pts([[300, 350], [316, 338], [316, 352], [300, 364]])}" fill="url(#gSide)" stroke="#4a5d88" stroke-width="1"/>
         <polygon points="${pts([[90, 350], [300, 350], [316, 338], [106, 338]])}" fill="url(#gPlateTop)" stroke="#5a70a3" stroke-width="1" stroke-linejoin="round"/>
@@ -255,7 +260,7 @@ export function buildPiezo() {
         <path d="M195 350 L211 338 M142 350 L158 338 M248 350 L264 338" stroke="#1a2440" stroke-width="1.2"/>
         <path d="M98 344 H306" stroke="#1a2440" stroke-width="1"/>
         <g id="print" opacity="0">
-          <path d="M122 348 C112 344 124 339 146 339 L262 339.5 C290 340 294 346 270 348.6 Z" fill="url(#gPrint)" filter="url(#soft)"/>
+          <path d="M122 348 C112 344 124 339 146 339 L262 339.5 C290 340 294 346 270 348.6 Z" fill="url(#gPrint)"/>
           <path d="M128 347.4 C122 344.6 130 341 146 341 L258 341.4 C280 341.8 284 345.6 266 347.6 Z" fill="none" stroke="#fff4b8" stroke-width="1" opacity=".9"/>
         </g>
         <rect x="90" y="350" width="210" height="14" fill="url(#gPlateF)" stroke="#4a5d88" stroke-width="1.2"/>
@@ -305,11 +310,13 @@ export function buildPiezo() {
       <path d="M187 510 h4 l2 -4 l3 7 l2 -3 h5" stroke="#3aa0ff" stroke-width="1.2" fill="none" stroke-linejoin="round"/>
       ${[0, 1].map((i) => `<g transform="translate(${160 + i * 10} 512)"><rect x="-3" y="-6" width="6" height="11" rx="1" fill="#2a3c66"/><ellipse cx="0" cy="-6" rx="3" ry="1.2" fill="#8ea6d8"/></g>`).join('')}
       <rect x="216" y="500" width="14" height="8" rx="1.2" fill="#202838"/><rect x="216" y="512" width="14" height="8" rx="1.2" fill="#202838"/>
-      <circle cx="232" cy="524" r="2" fill="#2ee59d" filter="url(#gl)"/>
+      <circle cx="232" cy="524" r="5.2" fill="#2ee59d" opacity=".22"/><circle cx="232" cy="524" r="2" fill="#2ee59d"/>
       <text class="lbl s" x="195" y="546" text-anchor="middle">controlador</text>
     </g>
 
     <!-- SUPERCAPACITOR (cilindro) -->
+    <ellipse id="capGlow" cx="100" cy="610" rx="48" ry="62" fill="url(#gGlowY)" opacity="0"/>
+    <ellipse id="batGlow" cx="296" cy="606" rx="78" ry="52" fill="url(#gGlowG)" opacity="0"/>
     <g id="supercap">
       <ellipse cx="100" cy="648" rx="25" ry="5.5" fill="#0a1626"/>
       <rect x="75" y="572" width="50" height="76" rx="8" fill="url(#gCap)" stroke="#3aa0ff" stroke-width="1.2"/>
@@ -353,7 +360,7 @@ export function buildPiezo() {
         <text class="scr-k" x="113" y="770" id="scrSteps">0 pisadas hoy</text>
         <path d="M232 760 l10 -14 l10 6 l12 -22 l12 10 V770 H232Z" fill="#2ee59d" opacity=".12"/>
         <path d="M232 760 l10 -14 l10 6 l12 -22 l12 10" stroke="#2ee59d" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="276" cy="740" r="2.6" fill="#2ee59d" filter="url(#gl)"/>
+        <circle cx="276" cy="740" r="6.8" fill="#2ee59d" opacity=".22"/><circle cx="276" cy="740" r="2.6" fill="#2ee59d"/>
         <circle cx="280" cy="700" r="2.4" fill="#ff8a1f"/>
       </g>
       <rect x="101" y="686" width="188" height="100" rx="4" fill="url(#gGlare)" pointer-events="none"/>
@@ -376,7 +383,7 @@ export function buildPiezo() {
       ${[0, 1, 2, 3, 4].map((i) => `<rect x="${447 + i * 5.4}" y="470" width="3" height="10" rx="1" fill="#0a1222"/>`).join('')}
       <rect x="466" y="438" width="3.4" height="14" rx="1.2" fill="#6b7ba0"/>
       <rect x="466" y="424" width="3.4" height="16" rx="1.7" fill="#2a3348"/>
-      <circle cx="467.7" cy="423" r="3" fill="#3aa0ff" filter="url(#gl)"/>
+      <circle cx="467.7" cy="423" r="7.8" fill="#3aa0ff" opacity=".22"/><circle cx="467.7" cy="423" r="3" fill="#3aa0ff"/>
       ${[0, 1, 2].map((i) => `<path class="wave" d="M${476 + i * 9} ${409 - i * 4} q${8 + i * 4} 14 0 ${28 + i * 8}" stroke="#3aa0ff" stroke-width="2" fill="none" opacity="0"/>`).join('')}
       <text class="lbl s" x="460" y="502" text-anchor="middle">pasarela</text>
     </g>
@@ -387,7 +394,7 @@ export function buildPiezo() {
       <rect x="488" y="308" width="274" height="284" rx="16" fill="none" stroke="#1d2842" stroke-width="1"/>
       <rect x="600" y="306" width="50" height="5" rx="2.5" fill="#060b16"/>
       <text class="scr-k" x="500" y="334">PLATAFORMA · AFLUENCIA POR HORA</text>
-      <circle cx="742" cy="331" r="3" fill="#2ee59d" filter="url(#gl)"/>
+      <circle cx="742" cy="331" r="7.8" fill="#2ee59d" opacity=".22"/><circle cx="742" cy="331" r="3" fill="#2ee59d"/>
       <text id="dashN" class="dash-v" x="500" y="374">0</text>
       <text class="scr-k" x="500" y="394">personas detectadas</text>
       ${[0, 1, 2, 3].map((i) => `<line x1="492" y1="${420 + i * 35}" x2="752" y2="${420 + i * 35}" stroke="#18213a" stroke-dasharray="2 3"/>`).join('')}
@@ -424,7 +431,7 @@ export function piezoTimeline(root) {
   gsap.set(q('.dbar'), { scaleY: 0, transformOrigin: '50% 100%' });
   gsap.set(q('.qp, .qn'), { opacity: 0 });
   gsap.set(pulses, { opacity: 0 });
-  gsap.set(q('.wire-hot'), { strokeDasharray: '0 1000' });
+  gsap.set(q('.wire-hot, .wire-glow'), { strokeDasharray: '0 1000' });
 
   // Paso 1: presentación de la baldosa (cámara se acerca levemente)
   tl.addLabel('s1')
@@ -485,18 +492,18 @@ export function piezoTimeline(root) {
         .to(p, { opacity: 0, duration: 0.1 }, `${at}+0.85`);
     });
   }
-  tl.to(q('.wire-hot').slice(0, 2), { strokeDasharray: '400 0', duration: 1.4, ease: 'none' }, 's4+=0.9');
+  tl.to(q('.h1, .h2'), { strokeDasharray: '400 0', duration: 1.4, ease: 'none' }, 's4+=0.9');
 
   // Paso 5: supercap se llena rápido y pasa a la batería
   tl.addLabel('s5')
     .to(W, { ...cam(200, 600, 1.28), duration: 1 }, 's5')
     .to(q('.h3'), { strokeDasharray: '200 0', duration: 0.5, ease: 'none' }, 's5+=0.2')
     .to(q('#capFill'), { scaleY: 1, duration: 0.5, ease: 'expo.out' }, 's5+=0.6')
-    .to(q('#supercap'), { filter: 'drop-shadow(0 0 10px #ffe14d)', duration: 0.3 }, 's5+=0.7')
+    .to(q('#capGlow'), { opacity: 1, duration: 0.3 }, 's5+=0.7')
     .to(q('.h4'), { strokeDasharray: '200 0', duration: 0.5, ease: 'none' }, 's5+=1.0')
     .to(q('#capFill'), { scaleY: 0.25, duration: 0.8 }, 's5+=1.2')
     .to(q('.cell'), { scaleY: 1, duration: 0.5, stagger: 0.2, ease: 'back.out(2)' }, 's5+=1.2')
-    .to(q('#battery'), { filter: 'drop-shadow(0 0 10px #2ee59d)', duration: 0.4 }, 's5+=1.8');
+    .to(q('#batGlow'), { opacity: 1, duration: 0.4 }, 's5+=1.8');
   pulses.slice(6, 10).forEach((p, i) => {
     const path = q(i < 2 ? '#w3' : '#w4')[0];
     tl.set(p, { opacity: 1, fill: '#ffe14d' }, `s5+=${0.2 + i * 0.3}`)
@@ -519,7 +526,7 @@ export function piezoTimeline(root) {
         scrSteps.textContent = Math.round(v * 614).toLocaleString('es-CO') + ' pisadas';
       },
     }, 's6+=0.9')
-    .to(q('.led'), { fill: '#fff4b8', filter: 'drop-shadow(0 0 6px #ffe14d)', duration: 0.2, stagger: 0.07 }, 's6+=0.8')
+    .to(q('.led'), { fill: '#fff4b8', duration: 0.2, stagger: 0.07 }, 's6+=0.8')
     .to(q('.halo'), { opacity: 1, duration: 0.25, stagger: 0.07 }, 's6+=0.8');
 
   // Paso 7: datos
@@ -540,8 +547,10 @@ export function piezoAmbient(root) {
   const a = [];
   a.push(gsap.to(q('.wave'), { x: 6, repeat: -1, yoyo: true, duration: 0.8, ease: 'sine.inOut', stagger: 0.15 }));
   a.push(gsap.to(q('#sensor'), { opacity: 0.3, repeat: -1, yoyo: true, duration: 0.6 }));
-  a.push(gsap.to(q('.wire-hot'), { strokeDashoffset: -40, repeat: -1, duration: 1.2, ease: 'none' }));
-  return () => a.forEach((t) => t.kill());
+  // Solo corre mientras la historia está en pantalla
+  const io = new IntersectionObserver(([e]) => a.forEach((t) => (e.isIntersecting ? t.resume() : t.pause())));
+  io.observe(root);
+  return () => { io.disconnect(); a.forEach((t) => t.kill()); };
 }
 
 export function stepEnergy() { energy.add(3); }
