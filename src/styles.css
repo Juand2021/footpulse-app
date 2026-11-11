@@ -136,16 +136,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .sec { position: relative; padding: 64px var(--pad); }
 .kicker {
   --k: var(--green);
-  display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; padding: 6px 12px 6px 8px; border-radius: 99px;
-  font: 600 13.5px/1 var(--f-body); color: var(--k);
-  background: color-mix(in srgb, var(--k) 10%, transparent); border: 1px solid color-mix(in srgb, var(--k) 35%, transparent);
-}
-.kicker::before {
-  content: ''; width: 16px; height: 16px; flex: none; background: currentColor;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13 2 4 14h7l-1 8 9-12h-7z'/%3E%3C/svg%3E") center/contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13 2 4 14h7l-1 8 9-12h-7z'/%3E%3C/svg%3E") center/contain no-repeat;
+  display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: var(--k);
 }
 .kicker.o { --k: var(--orange); } .kicker.b { --k: var(--blue); } .kicker.y { --k: var(--yellow); }
+.k-ico { flex: none; }
+.k-ico svg { width: 48px; height: 48px; filter: drop-shadow(0 6px 14px rgba(0,0,0,.5)); }
+.k-txt { display: grid; gap: 4px; font: 800 22px/0.95 'Big Shoulders Display', var(--f-mono); text-transform: uppercase; letter-spacing: .035em; color: var(--ink); }
+.k-txt small { font: 700 12px/1 var(--f-mono); color: var(--k); letter-spacing: .04em; }
+.k-wire { position: relative; flex: 1; min-width: 24px; height: 2px; border-radius: 2px; overflow: hidden; background: linear-gradient(90deg, var(--k), transparent); opacity: .7; }
+.k-wire i { position: absolute; top: -1px; left: -24px; width: 22px; height: 4px; border-radius: 2px; background: #fff; box-shadow: 0 0 10px var(--k); animation: kwire 2.6s linear infinite; }
+@keyframes kwire { to { left: 100%; } }
 h1, h2, h3 { font-family: var(--f-head); font-stretch: 112%; letter-spacing: -.025em; line-height: 1.04; text-wrap: balance; }
 h1 { font-size: clamp(40px, 12vw, 54px); font-weight: 700; }
 h2 { font-size: clamp(29px, 8.4vw, 37px); font-weight: 800; margin-bottom: 14px; }

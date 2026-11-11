@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 import { startField } from './anim/field.js';
 import { energy } from './ui.js';
+import { decorateKickers } from './icons.js';
 import proyecto from './views/proyecto.js';
 import cotizar from './views/cotizar.js';
 import invertir from './views/invertir.js';
@@ -37,6 +38,7 @@ function mount(name) {
   let cleanup = null;
   ctx.add(() => { cleanup = routes[name](view, ctx); });
   current = { name, ctx, cleanup };
+  decorateKickers(view);
   requestAnimationFrame(() => ScrollTrigger.refresh());
 }
 
@@ -65,6 +67,8 @@ async function go(name, first = false) {
 }
 
 window.addEventListener('hashchange', () => go(routeName()));
+// Títulos de sección que aparecen después (cotizador) también reciben su ícono
+new MutationObserver(() => { if (view.querySelector('.kicker:not([data-done])')) decorateKickers(view); }).observe(view, { childList: true, subtree: true });
 
 // Medidor de energía de la visita (cada interacción suma julios)
 const meter = document.getElementById('meter-val');
