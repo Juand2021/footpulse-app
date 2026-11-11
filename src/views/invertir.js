@@ -17,7 +17,7 @@ export default function invertir(root) {
   ];
 
   root.innerHTML = `
-  <section class="sec" style="padding-top:40px">
+  <section class="sec" style="padding-top:100px">
     <span class="kicker">Información financiera</span>
     <h2 data-split>Un negocio que <span class="grad">crea valor</span></h2>
     <p class="lead" data-r style="margin-bottom:22px">Con COP 146 millones de los socios y una rentabilidad mínima exigida de 18 %, FootPulse devuelve más de lo que pide.</p>
@@ -183,7 +183,7 @@ export default function invertir(root) {
   rows.forEach((r, i) => {
     const y = i * 46 + 18;
     const a = Math.min(r.vpn, 108.3), b = Math.max(r.vpn, 108.3);
-    s += `<text x="10" y="${y - 4}" style="fill:#b3bfd6;font-family:Inter;font-size:11px">${r.n}</text>`;
+    s += `<text x="10" y="${y - 4}" style="fill:#b3bfd6;font-family:Figtree;font-size:11.5px">${r.n}</text>`;
     s += `<rect class="tb" x="${sx(a)}" y="${y + 2}" width="${sx(b) - sx(a)}" height="14" rx="4" fill="${r.vpn < 0 ? C.o : C.b}" style="transform-origin:${sx(108.3)}px 0"/>`;
     s += `<text class="val-lbl" x="${r.vpn < 0 ? sx(r.vpn) - 4 : sx(r.vpn) - 4}" y="${y + 13}" text-anchor="end">${fmtM(r.vpn)}</text>`;
   });

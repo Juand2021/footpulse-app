@@ -1,5 +1,6 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { buildGlassTitle, animateGlass, surgeGlass } from '../anim/glass.js';
 import { buildPiezo, piezoTimeline, piezoAmbient, piezoSteps } from '../anim/piezo.js';
 import { EQUIPO, ENERGIA, PRODUCTO, TRIBUTARIO, MERCADO, fmtNum } from '../data.js';
 import { reveals, countOnView, countTo, energy, whenReady, reduced, $, $$, icon } from '../ui.js';
@@ -41,8 +42,8 @@ export default function proyecto(root) {
   <section class="hero" id="top">
     <div class="hero-floor">${heroFloor()}</div>
     <div class="hero-txt">
-      <span class="kicker">Energía piezoeléctrica · Bogotá</span>
-      <h1 id="h1"><span class="l">Cada paso</span> <span class="l">enciende</span> <span class="l grad">la ciudad</span></h1>
+      <span class="kicker">Pisos que generan energía en Bogotá</span>
+      ${buildGlassTitle()}
       <p class="lead" id="hlead">Baldosas que convierten las pisadas de la gente en energía limpia que se ve, y en datos de afluencia que se usan.</p>
       <div class="hero-ctas" id="hctas">
         <a class="btn" href="#como">Ver cómo funciona</a>
@@ -132,7 +133,7 @@ export default function proyecto(root) {
         <defs><marker id="ar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#2ee59d"/></marker></defs>
         <path id="cyc" d="M60 75 A100 55 0 1 1 260 75 A100 55 0 1 1 60 75" fill="none" stroke="#24304a" stroke-width="2"/>
         <path id="cycHot" d="M60 75 A100 55 0 1 1 260 75 A100 55 0 1 1 60 75" fill="none" stroke="#2ee59d" stroke-width="3" stroke-linecap="round" marker-end="url(#ar)"/>
-        ${[['Pasos', 160, 20, -12, '#ff8a1f'], ['Energía', 260, 75, 24, '#ffe14d'], ['Luz y datos', 160, 130, 26, '#2ee59d'], ['Más visitas', 60, 75, 24, '#3aa0ff']].map(([t, x, y, dy, c]) => `<g class="cyc-n"><circle cx="${x}" cy="${y}" r="7" fill="${c}" stroke="#0e1320" stroke-width="3"/><text x="${x}" y="${y + dy}" text-anchor="middle" fill="#eef3ff" font-family="Space Grotesk" font-size="13" font-weight="600">${t}</text></g>`).join('')}
+        ${[['Pasos', 160, 20, -12, '#ff8a1f'], ['Energía', 260, 75, 24, '#ffe14d'], ['Luz y datos', 160, 130, 26, '#2ee59d'], ['Más visitas', 60, 75, 24, '#3aa0ff']].map(([t, x, y, dy, c]) => `<g class="cyc-n"><circle cx="${x}" cy="${y}" r="7" fill="${c}" stroke="#0e1320" stroke-width="3"/><text x="${x}" y="${y + dy}" text-anchor="middle" fill="#eef3ff" font-family="Archivo" font-size="13" font-weight="700">${t}</text></g>`).join('')}
       </svg>
     </div>
     <div class="vlist" data-stagger>
@@ -228,12 +229,16 @@ export default function proyecto(root) {
     const tl = gsap.timeline();
     tl.from('.hero-floor', { opacity: 0, y: 80, duration: 1.4, ease: 'expo.out' })
       .from(tiles, { opacity: 0, scale: 0.4, transformOrigin: '50% 50%', duration: 0.6, stagger: { each: 0.008, from: 'end' }, ease: 'back.out(2)' }, 0)
-      .from('#h1 .l', { yPercent: 100, opacity: 0, rotate: 3, duration: 1, stagger: 0.1, ease: 'expo.out' }, 0.25)
+      .from('.gl-line', { y: 40, opacity: 0, duration: 1.1, stagger: 0.12, ease: 'expo.out' }, 0.25)
+      .from('.hero .kicker', { opacity: 0, x: -20, duration: 0.6 }, 0.2)
       .from('#hlead', { opacity: 0, y: 20, duration: 0.8 }, 0.6)
       .from('#hctas > *', { opacity: 0, y: 20, stagger: 0.08, duration: 0.6 }, 0.75)
       .from('.scroll-cue', { opacity: 0, duration: 0.6 }, 1)
       .add(() => walk.play(), 0.6);
   });
+  const glass = $('#glassTitle', root);
+  kills.push(animateGlass(glass));
+  glass.addEventListener('pointerdown', () => { surgeGlass(glass); energy.add(3); });
   gsap.to('.scroll-cue i', { scaleY: 0.3, transformOrigin: 'top', repeat: -1, yoyo: true, duration: 0.9, ease: 'sine.inOut' });
   // Parallax del hero al hacer scroll
   gsap.to('.hero-floor', { yPercent: 25, scale: 1.15, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });

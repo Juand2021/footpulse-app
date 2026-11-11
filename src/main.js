@@ -68,7 +68,30 @@ window.addEventListener('hashchange', () => go(routeName()));
 
 // Medidor de energía de la visita (cada interacción suma julios)
 const meter = document.getElementById('meter-val');
-energy.on((j) => { meter.textContent = j.toLocaleString('es-CO', { minimumFractionDigits: 1, maximumFractionDigits: 1 }); });
+const cells = [...document.querySelectorAll('.cell-bat i')];
+let lastLit = -1;
+energy.on((j) => {
+  meter.textContent = j.toLocaleString('es-CO', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  // La batería se llena cada 30 J (10 pisadas) y vuelve a empezar
+  const lit = j === 0 ? 0 : (Math.floor(j / 5) % 6) + 1;
+  if (lit === lastLit) return;
+  lastLit = lit;
+  cells.forEach((c, i) => c.classList.toggle('on', i < lit));
+  if (lit) gsap.fromTo(cells[lit - 1], { scaleY: 0.3 }, { scaleY: 1, duration: 0.4, ease: 'back.out(3)' });
+  gsap.fromTo('.cell', { boxShadow: '0 0 0 2px rgba(46,229,157,.55), 0 8px 24px rgba(0,0,0,.45)' }, { boxShadow: '0 0 0 0px rgba(46,229,157,0), 0 8px 24px rgba(0,0,0,.45)', duration: 0.6 });
+});
+
+// El encabezado se esconde al bajar y vuelve al subir
+let lastY = 0, hidden = false;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  const down = y > lastY && y > 120;
+  if (down !== hidden) {
+    hidden = down;
+    gsap.to('#topbar', { yPercent: down ? -140 : 0, duration: 0.45, ease: down ? 'power2.in' : 'expo.out' });
+  }
+  lastY = y;
+}, { passive: true });
 
 // Loader: barra de carga + número
 function runLoader() {

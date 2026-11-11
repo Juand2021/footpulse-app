@@ -29,7 +29,7 @@ const M = (v, d = 1) => 'COP ' + fmtNum(v / 1e6, d) + ' M';
 
 export default function cotizar(root) {
   root.innerHTML = `
-  <section class="sec" style="padding-top:34px">
+  <section class="sec" style="padding-top:96px">
     <span class="kicker">Cotizador</span>
     <h2 id="qT">Diseña tu piso de energía</h2>
     <p class="lead" id="qL" style="margin-bottom:22px">Cuatro pasos. Validamos el tamaño, las normas y la disponibilidad de obra al instante.</p>

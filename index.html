@@ -9,7 +9,7 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,700..900&family=Archivo+Narrow:wght@500;600;700&family=Figtree:ital,wght@0,400..700;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
   <div id="loader" aria-hidden="true">
@@ -26,13 +26,21 @@
   <div id="desk-note">Diseñada para celular · abre este enlace en tu teléfono para la mejor experiencia</div>
 
   <div id="app">
-    <header class="topbar">
+    <header class="topbar" id="topbar">
       <a href="#/proyecto" class="brand" aria-label="FootPulse, inicio">
-        <svg viewBox="0 0 32 32" class="brand-ico"><rect x="3" y="3" width="26" height="26" rx="7"/><path d="M18 6 10 18h6l-2 8 8-12h-6z"/></svg>
-        <span>Foot<b>Pulse</b></span>
+        <svg viewBox="0 0 40 40" class="brand-mark" aria-hidden="true">
+          <rect x="1" y="1" width="38" height="38" rx="11" class="bm-bg"/>
+          <rect x="7" y="7" width="12" height="12" rx="3" class="bm-t"/>
+          <rect x="21" y="7" width="12" height="12" rx="3" class="bm-t on"/>
+          <rect x="7" y="21" width="12" height="12" rx="3" class="bm-t"/>
+          <rect x="21" y="21" width="12" height="12" rx="3" class="bm-t"/>
+          <path d="M4 27h7l3-6 4 11 3-8h15" class="bm-p"/>
+        </svg>
+        <span class="wm">foot<b>pulse</b></span>
       </a>
-      <div class="meter" aria-label="Energía generada en esta visita">
-        <span class="meter-dot"></span><span id="meter-val">0,0</span>&nbsp;J
+      <div class="cell" aria-label="Energía generada en esta visita" role="status">
+        <span class="cell-bat" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="cell-v"><b id="meter-val">0,0</b><small>julios</small></span>
       </div>
     </header>
 
