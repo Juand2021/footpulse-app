@@ -97,112 +97,107 @@ export default function proyecto(root) {
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec tight">
     <span class="kicker">A escala real</span>
     <h2 data-split>Un punto de alto tráfico, un día</h2>
-    <p class="lead" data-r style="margin-bottom:22px">Con ${fmtNum(flujo)} personas al día y 2 pisadas por persona sobre la franja de baldosas:</p>
-    <div class="card glow" data-r="zoom" style="margin-bottom:14px">
-      <div class="muted mono">${fmtNum(flujo)} × 2 × 3 J</div>
-      <div class="big-num" style="margin:10px 0 4px"><span id="kwh">0</span><span class="unit">kWh / día</span></div>
+    <div class="card glow" data-r="zoom" style="margin-bottom:10px">
+      <div class="muted mono">${fmtNum(flujo)} personas × 2 pisadas × 3 J</div>
+      <div class="big-num" style="margin:8px 0 4px"><span id="kwh">0</span><span class="unit">kWh / día</span></div>
       <div class="muted">${fmtNum(ENERGIA.kwhMesReferencia, 1)} kWh al mes · unos COP ${fmtNum(Math.round(copMes / 100) * 100)} al mes en la red.</div>
     </div>
     <div class="eq-grid" data-stagger>
-      <div class="eq">${I.bulb.replace('<svg', '<svg style="stroke:var(--yellow);fill:none;stroke-width:1.7"')}<b id="eqLed">0</b><span>horas de un bombillo LED de 10 W, cada día</span></div>
-      <div class="eq">${I.phone.replace('<svg', '<svg style="stroke:var(--green);fill:none;stroke-width:1.7"')}<b id="eqCel">0</b><span>cargas completas de celular, cada día</span></div>
-      <div class="eq wide">${I.eye.replace('<svg', '<svg style="stroke:var(--blue);fill:none;stroke-width:1.7"')}<span><b style="font-size:20px;display:inline">Lo que se vende es lo que se ve.</b> La energía alimenta luces, señalización y la pantalla que la muestra; el cliente gana visibilidad sostenible y datos de afluencia.</span></div>
+      <div class="eq">${I.bulb.replace('<svg', '<svg style="stroke:var(--yellow);fill:none;stroke-width:1.7"')}<div><b id="eqLed">0</b><span>horas de LED de 10 W al día</span></div></div>
+      <div class="eq">${I.phone.replace('<svg', '<svg style="stroke:var(--green);fill:none;stroke-width:1.7"')}<div><b id="eqCel">0</b><span>cargas de celular al día</span></div></div>
     </div>
-    <p class="muted" style="margin-top:12px">Energía por pisada y flujo: Informe 2 (New Atlas, 2016). Equivalencias calculadas por el equipo: LED de 10 W y celular de 15 Wh con 85 % de eficiencia de carga.</p>
+    <p class="muted fine">Fuente: Informe 2 (New Atlas, 2016). Equivalencias del equipo: LED de 10 W, celular de 15 Wh al 85 %.</p>
   </section>
 
-  <section class="sec">
+  <section class="sec tight">
     <span class="kicker b">Quiénes somos</span>
     <h2 data-split>Tres ingenieros, una idea que se pisa</h2>
-    <p class="lead" data-r style="margin-bottom:22px">FootPulse es una empresa integradora bogotana que diseña, instala y mantiene pisos piezoeléctricos en espacios de alto tránsito. Nace en Evaluación de Proyectos de Ingeniería de la Universidad Jorge Tadeo Lozano.</p>
+    <p class="lead sm" data-r>Empresa integradora bogotana que diseña, instala y mantiene pisos piezoeléctricos. Nace en Evaluación de Proyectos de Ingeniería de la U. Jorge Tadeo Lozano.</p>
     <div class="team" data-stagger>
-      ${EQUIPO.map((m) => `<div class="member"><div class="avatar">${m.ini}</div><div><b>${m.nombre}</b><span>Socio fundador · Ingeniería</span></div></div>`).join('')}
+      ${EQUIPO.map((m) => `<div class="member"><div class="avatar">${m.ini}</div><b>${m.nombre.split(' ').slice(0, 2).join(' ')}</b></div>`).join('')}
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec tight">
     <span class="kicker o">Valor agregado</span>
-    <h2 data-split>No vendemos baldosas. Vendemos una experiencia medible.</h2>
-    <div class="vlist" data-stagger style="margin-top:22px">
-      <div class="vitem o"><div class="vico">${I.key}</div><div><h3>Llave en mano</h3><p>Visita técnica, diseño, importación, obra civil, montaje y puesta en marcha. El cliente no coordina nada.</p></div></div>
-      <div class="vitem"><div class="vico">${I.chart}</div><div><h3>Datos de afluencia en tiempo real</h3><p>Cuántas personas pasan y a qué hora, para decidir horarios, personal y vitrinas.</p></div></div>
-      <div class="vitem b"><div class="vico">${I.screen}</div><div><h3>Energía que se ve</h3><p>Pantalla de 55" que muestra en vivo lo que generan los pasos. La sostenibilidad deja de ser un afiche.</p></div></div>
-      <div class="vitem y"><div class="vico">${I.drop}</div><div><h3>Diseñado para Bogotá</h3><p>Módulos adaptados a la lluvia y al desgaste, con superficie antideslizante y prueba en cada obra.</p></div></div>
-      <div class="vitem"><div class="vico">${I.grow}</div><div><h3>Crece por etapas</h3><p>Empieza con un piloto de 10 m² y amplía según resultados; cada ampliación suma 10 m² sin pantalla ni baterías nuevas.</p></div></div>
-      <div class="vitem o"><div class="vico">${I.pin}</div><div><h3>Soporte local en pesos</h3><p>Pavegen y Energy Floors no tienen presencia en Colombia. Nosotros respondemos aquí y cobramos en COP.</p></div></div>
+    <h2 data-split>Vendemos una experiencia medible</h2>
+    <div class="vgrid" data-stagger>
+      <div class="vitem o"><div class="vico">${I.key}</div><h3>Llave en mano</h3><p>Diseño, importación, obra y puesta en marcha.</p></div>
+      <div class="vitem"><div class="vico">${I.chart}</div><h3>Datos de afluencia</h3><p>Quién pasa y a qué hora, en tiempo real.</p></div>
+      <div class="vitem b"><div class="vico">${I.screen}</div><h3>Energía que se ve</h3><p>Pantalla de 55" con la energía en vivo.</p></div>
+      <div class="vitem y"><div class="vico">${I.drop}</div><h3>Hecho para Bogotá</h3><p>Lluvia, desgaste y superficie antideslizante.</p></div>
+      <div class="vitem"><div class="vico">${I.grow}</div><h3>Crece por etapas</h3><p>Piloto de 10 m² y ampliaciones de 10 m².</p></div>
+      <div class="vitem o"><div class="vico">${I.pin}</div><h3>Soporte local</h3><p>Pavegen y Energy Floors no están en Colombia.</p></div>
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec tight">
     <span class="kicker">Por qué es sostenible</span>
     <h2 data-split>Energía que hoy se pierde en el piso</h2>
-    <div class="card" data-r="zoom" style="margin:18px 0 14px">
-      <svg viewBox="0 -14 320 180" id="cycle" style="width:100%">
+    <div class="card" data-r="zoom" style="margin:6px 0 10px;padding:8px 12px">
+      <svg viewBox="0 -14 320 180" id="cycle" style="width:100%;max-height:170px">
         <defs><marker id="ar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#2ee59d"/></marker></defs>
         <path id="cyc" d="M60 75 A100 55 0 1 1 260 75 A100 55 0 1 1 60 75" fill="none" stroke="#24304a" stroke-width="2"/>
         <path id="cycHot" d="M60 75 A100 55 0 1 1 260 75 A100 55 0 1 1 60 75" fill="none" stroke="#2ee59d" stroke-width="3" stroke-linecap="round" marker-end="url(#ar)"/>
         ${[['Pasos', 160, 20, -12, '#ff8a1f'], ['Energía', 260, 75, 24, '#ffe14d'], ['Luz y datos', 160, 130, 26, '#2ee59d'], ['Más visitas', 60, 75, 24, '#3aa0ff']].map(([t, x, y, dy, c]) => `<g class="cyc-n"><circle cx="${x}" cy="${y}" r="7" fill="${c}" stroke="#0e1320" stroke-width="3"/><text x="${x}" y="${y + dy}" text-anchor="middle" fill="#eef3ff" font-family="Archivo" font-size="13" font-weight="700">${t}</text></g>`).join('')}
       </svg>
     </div>
-    <div class="vlist" data-stagger>
-      <div class="vitem"><div class="vico">${I.leaf}</div><div><h3>Cero combustible, cero emisiones al generar</h3><p>La fuente es el movimiento de las personas, que ya ocurre todos los días.</p></div></div>
-      <div class="vitem b"><div class="vico">${I.battery}</div><div><h3>Almacenamiento seguro</h3><p>Baterías LiFePO4 de larga vida útil y supercapacitores para captar pulsos rápidos.</p></div></div>
-      <div class="vitem y"><div class="vico">${I.users}</div><div><h3>Educa mientras camina</h3><p>El 68 % de los encuestados vio útil la propuesta y la valoró con 4,1 sobre 5 (escenario simulado del Informe 2).</p></div></div>
+    <div class="chips3" data-stagger>
+      <div class="vitem"><div class="vico">${I.leaf}</div><h3>Cero emisiones al generar</h3></div>
+      <div class="vitem b"><div class="vico">${I.battery}</div><h3>Baterías LiFePO4 seguras</h3></div>
+      <div class="vitem y"><div class="vico">${I.users}</div><h3>68 % la vio útil*</h3></div>
     </div>
+    <p class="muted fine">* Escenario simulado del Informe 2 (valoración 4,1 / 5).</p>
   </section>
 
-  <section class="hscroll" id="why">
-    <div class="hscroll-head">
-      <span class="kicker y">Por qué contratarnos</span>
-      <h2 style="margin:0">Cinco razones para firmar</h2>
+  <section class="sec tight" id="why">
+    <span class="kicker y">Por qué contratarnos</span>
+    <h2 style="margin-bottom:12px">Cinco razones para firmar</h2>
+    <div class="swipe" id="whyTrack">
+      <article class="hcard c1"><span class="num">01</span><span class="tag">Precio</span><h3>17 % bajo el techo del cliente</h3><p>Piloto de 10 m² a COP 125 M, bajo los 150 M que el cliente aceptaba pagar.</p><div class="mono hv" style="color:var(--orange)">125 M</div></article>
+      <article class="hcard c2"><span class="num">02</span><span class="tag">Incluido</span><h3>Primer año sin mantenimiento</h3><p>Garantía y datos incluidos; luego FootPulse Care.</p><div class="mono hv" style="color:var(--green)">1,2 M/mes</div></article>
+      <article class="hcard c3"><span class="num">03</span><span class="tag">Datos</span><h3>Afluencia en tu celular</h3><p>Sin cámaras ni datos personales, con reporte mensual.</p><div class="mono hv" style="color:var(--blue)">24/7</div></article>
+      <article class="hcard c4"><span class="num">04</span><span class="tag">Impuestos</span><h3>Beneficios Ley 1715</h3><p>Con certificado UPME: hasta 50 % deducible, sin IVA ni arancel.</p><div class="mono hv" style="color:var(--yellow)">−50 %</div></article>
+      <article class="hcard c5"><span class="num">05</span><span class="tag">Rápido</span><h3>Obra en ~10 días hábiles</h3><p>Dos técnicos instalan y prueban con mínima interrupción.</p><div class="mono hv" style="color:#c99bff">10 días</div></article>
     </div>
-    <div class="hscroll-track" id="whyTrack">
-      <article class="hcard c1"><span class="num">01</span><div><span class="tag">Precio</span><h3>17 % bajo el techo del cliente</h3><p>COP 12,5 millones por m²: el piloto de 10 m² cuesta COP 125 millones, por debajo de los 150 millones que los clientes dijeron estar dispuestos a pagar.</p></div><div class="mono" style="font-size:28px;color:var(--orange)">125 M</div></article>
-      <article class="hcard c2"><span class="num">02</span><div><span class="tag">Incluido</span><h3>Primer año sin pagar mantenimiento</h3><p>Garantía y plataforma de datos incluidas el primer año. Después, FootPulse Care por COP 1,2 millones al mes.</p></div><div class="mono" style="font-size:28px;color:var(--green)">1,2 M/mes</div></article>
-      <article class="hcard c3"><span class="num">03</span><div><span class="tag">Datos</span><h3>Afluencia por hora en tu celular</h3><p>Un sensor cuenta las pisadas sin cámaras ni datos personales y la plataforma te entrega un reporte mensual de sostenibilidad.</p></div><div class="mono" style="font-size:28px;color:var(--blue)">24/7</div></article>
-      <article class="hcard c4"><span class="num">04</span><div><span class="tag">Impuestos</span><h3>Beneficios de la Ley 1715</h3><p>Con certificado UPME, la inversión puede deducir hasta 50 % en renta, sin IVA y sin arancel en equipos.</p></div><div class="mono" style="font-size:28px;color:var(--yellow)">−50 %</div></article>
-      <article class="hcard c5"><span class="num">05</span><div><span class="tag">Rápido</span><h3>Obra en unos 10 días hábiles</h3><p>Dos técnicos instalan, prueban la superficie antideslizante y ponen en marcha el sistema con mínima interrupción.</p></div><div class="mono" style="font-size:28px;color:#c99bff">10 días</div></article>
-    </div>
+    <div class="swipe-dots" aria-hidden="true">${[0, 1, 2, 3, 4].map((i) => `<i${i ? '' : ' class="on"'}></i>`).join('')}</div>
   </section>
 
-  <section class="sec">
+  <section class="sec tight">
     <span class="kicker y">Beneficios tributarios</span>
     <h2 data-split>Lo que la ley devuelve a tu empresa</h2>
-    <p class="lead" data-r style="margin-bottom:20px">La Ley 1715 de 2014, modificada por la Ley 2099 de 2021, da incentivos a las empresas que invierten en fuentes no convencionales de energía y en gestión eficiente de la energía.</p>
+    <p class="lead sm" data-r>Ley 1715 de 2014, modificada por la Ley 2099 de 2021, para inversiones en energía no convencional y gestión eficiente.</p>
     <div class="tax" data-stagger>
-      ${TRIBUTARIO.beneficios.map((b, i) => `<div class="tax-item"><div class="pct">${['50 %', '0 % IVA', '0 % arancel', '33,33 %'][i]}</div><h3>${b.t}</h3><p>${b.d}</p><div class="norma">${b.norma}</div></div>`).join('')}
+      ${TRIBUTARIO.beneficios.map((b, i) => `<div class="tax-item"><div class="pct">${['50 %', '0 % IVA', '0 %', '33,33 %'][i]}</div><h3>${['Deducción de renta', 'Exclusión de IVA', 'Sin arancel', 'Depreciación anual'][i]}</h3><div class="norma">${b.norma.replace('Ley 1715 de 2014', 'L. 1715').replace(', modificado por la Ley 2099 de 2021', ' (L. 2099)')}</div></div>`).join('')}
     </div>
 
-    <div class="card glow taxsim" data-r="zoom" style="margin-top:16px">
-      <span class="kicker" style="margin:0">Ejemplo con un piloto</span>
-      <div class="q-label" style="margin:0">Inversión <output id="tInvO">COP 125 M</output></div>
+    <div class="card glow taxsim" data-r="zoom" style="margin-top:12px">
+      <div class="q-label" style="margin:0">Ejemplo:&nbsp;<output id="tInvO">COP 125 M</output></div>
       <input type="range" id="tInv" min="10" max="60" step="1" value="10" aria-label="Metros cuadrados" />
       <div class="range-scale"><span>10 m²</span><span>60 m²</span></div>
       <div class="qrow"><span>Deducción de renta (50 %)</span><b id="tDed">COP 62,5 M</b></div>
-      <div class="qrow"><span>Menos impuesto a pagar (renta 35 %)</span><b id="tSave" style="color:var(--green)">COP 21,9 M</b></div>
+      <div class="qrow"><span>Menos impuesto (renta 35 %)</span><b id="tSave" style="color:var(--green)">COP 21,9 M</b></div>
       <div class="taxsim-bar"><i id="tBarA" style="background:var(--c-blue);width:50%"></i><i id="tBarB" style="background:var(--c-green);width:17.5%;margin-left:2px"></i></div>
-      <div class="ckey" style="margin-top:0"><span><i style="background:var(--c-blue)"></i>Inversión deducible (50 %)</span><span><i style="background:var(--c-green)"></i>Ahorro en impuesto</span></div>
-      <p class="muted">Cálculo ilustrativo: supone certificado UPME aprobado, tarifa de renta de 35 % (Estatuto Tributario, art. 240) y renta líquida suficiente. No incluye el IVA ni el arancel que se ahorran.</p>
+      <div class="ckey" style="margin-top:0"><span><i style="background:var(--c-blue)"></i>Deducible (50 %)</span><span><i style="background:var(--c-green)"></i>Ahorro en impuesto</span></div>
     </div>
 
-    <div class="warn" data-r style="margin-top:14px">${icon.warn}<div><b style="color:var(--ink)">Importante.</b> ${TRIBUTARIO.advertencia} ${TRIBUTARIO.alternativa}</div></div>
-    <details class="more" style="margin-top:14px"><summary>Trámite y fuentes</summary><div class="sources"><p>${TRIBUTARIO.tramite}</p>${TRIBUTARIO.fuentes.map((f) => `<a href="${f.u}" target="_blank" rel="noopener">${f.n}</a>`).join('')}</div></details>
+    <div class="warn" data-r style="margin-top:10px">${icon.warn}<div><b style="color:var(--ink)">No es automático.</b> Requiere certificado UPME y validación del contador. El descuento del art. 255 ET (25 %) no se combina con esta deducción.</div></div>
+    <details class="more" style="margin-top:10px"><summary>Detalle, supuestos y fuentes</summary><div class="sources">${TRIBUTARIO.beneficios.map((b) => `<p><b>${b.t}.</b> ${b.d} <i>${b.norma}.</i></p>`).join('')}<p>${TRIBUTARIO.advertencia} ${TRIBUTARIO.alternativa}</p><p>Ejemplo ilustrativo: supone certificado UPME aprobado, renta de 35 % (ET art. 240) y renta líquida suficiente; no incluye el IVA ni el arancel ahorrados.</p><p>${TRIBUTARIO.tramite}</p>${TRIBUTARIO.fuentes.map((f) => `<a href="${f.u}" target="_blank" rel="noopener">${f.n}</a>`).join('')}</div></details>
   </section>
 
-  <section class="sec">
+  <section class="sec tight">
     <span class="kicker b">Mejoras y próximos pasos</span>
     <h2 data-split>Hacia dónde crece FootPulse</h2>
-    <div class="timeline" style="margin-top:22px" id="road">
+    <div class="timeline" style="margin-top:12px" id="road">
       <span class="tl-fill"></span>
-      <div class="tl"><em>AÑO 1</em><b>2 pilotos privados con anticipo</b><span>Centros comerciales y universidades, 10 m² cada uno.</span></div>
-      <div class="tl"><em>AÑO 1</em><b>Validación en campo</b><span>Aplicar la encuesta y las entrevistas reales en los primeros 3 meses.</span></div>
-      <div class="tl"><em>AÑO 2 A 5</em><b>Ampliaciones de clientes</b><span>Entre 25 % y 50 % de los clientes amplía 10 m² cada año.</span></div>
-      <div class="tl"><em>AÑO 4</em><b>Espacios públicos</b><span>Instalaciones de 15 m² para entidades distritales.</span></div>
-      <div class="tl"><em>AÑO 5</em><b>${MERCADO.metaInstalaciones} instalaciones</b><span>17 % de los 100 sitios del mercado que podemos atender en Bogotá.</span></div>
-      <div class="tl"><em>FUTURO</em><b>Datos como servicio</b><span>Vender la afluencia como servicio, incluso sin la instalación completa.</span></div>
+      <div class="tl"><em>AÑO 1</em><b>2 pilotos de 10 m² y validación en campo</b></div>
+      <div class="tl"><em>AÑO 2 A 5</em><b>25 % a 50 % de clientes amplía 10 m²/año</b></div>
+      <div class="tl"><em>AÑO 4</em><b>Espacios públicos de 15 m²</b></div>
+      <div class="tl"><em>AÑO 5</em><b>${MERCADO.metaInstalaciones} instalaciones (17 % del mercado)</b></div>
+      <div class="tl"><em>FUTURO</em><b>Datos de afluencia como servicio</b></div>
     </div>
   </section>
 
@@ -345,17 +340,15 @@ export default function proyecto(root) {
   gsap.to(hot, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '#cycle', start: 'top 80%', end: 'bottom 40%', scrub: 1 } });
   gsap.from($$('.cyc-n', root), { scale: 0, transformOrigin: 'center', opacity: 0, stagger: 0.15, duration: 0.6, ease: 'back.out(3)', scrollTrigger: { trigger: '#cycle', start: 'top 80%' } });
 
-  // ---------- CARRUSEL HORIZONTAL ----------
+  // ---------- CARRUSEL (deslizable con el dedo, sin alargar el scroll) ----------
   const track = $('#whyTrack', root);
-  const dist = () => Math.max(0, track.scrollWidth - track.parentElement.clientWidth);
-  const hTween = gsap.to(track, {
-    x: () => -dist(),
-    ease: 'none',
-    scrollTrigger: { trigger: '#why', start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 0.6, invalidateOnRefresh: true, anticipatePin: 1 },
-  });
   const hcards = $$('.hcard', root);
-  gsap.from(hcards, { y: 60, opacity: 0, rotate: 4, stagger: 0.1, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '#why', start: 'top 70%' } });
-  hcards.forEach((c) => gsap.from(c.querySelector('.num'), { x: 40, opacity: 0, ease: 'none', scrollTrigger: { trigger: c, containerAnimation: hTween, start: 'left 95%', end: 'left 45%', scrub: true } }));
+  const dots = $$('.swipe-dots i', root);
+  gsap.from(hcards, { x: 60, opacity: 0, stagger: 0.08, duration: 0.9, ease: 'expo.out', scrollTrigger: { trigger: '#why', start: 'top 75%' } });
+  track.addEventListener('scroll', () => {
+    const i = Math.round(track.scrollLeft / (hcards[0].offsetWidth + 12));
+    dots.forEach((d, k) => d.classList.toggle('on', k === i));
+  }, { passive: true });
 
   // ---------- SIMULADOR TRIBUTARIO ----------
   const tInv = $('#tInv', root);
