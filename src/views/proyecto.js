@@ -75,8 +75,13 @@ export default function proyecto(root) {
     <h2 data-split>Pisa la baldosa</h2>
     <p class="lead" data-r style="margin-bottom:20px">Toca la baldosa: cada toque es una pisada de unos 3 julios. Mira el contador de arriba.</p>
     <div class="stomp" data-r="zoom">
-      <div class="stomp-pad" id="pad" role="button" tabindex="0" aria-label="Pisar la baldosa">
+      <div class="stomp-stage"><div class="stomp-pad" id="pad" role="button" tabindex="0" aria-label="Pisar la baldosa">
+        <svg class="fp-print" viewBox="0 0 74 150" aria-hidden="true"><defs><radialGradient id="fpG" cx=".5" cy=".4" r=".6"><stop offset="0" stop-color="#fff4b8"/><stop offset=".6" stop-color="#ffe14d"/><stop offset="1" stop-color="#ff8a1f"/></radialGradient></defs>
+          <path d="M37 4 C58 4 70 22 68 48 C66 70 58 80 58 96 C58 116 54 146 36 146 C18 146 14 124 16 104 C18 86 8 72 6 50 C4 22 16 4 37 4Z" fill="url(#fpG)" opacity=".85"/>
+          <path d="M14 30 H60 M10 46 H64 M12 62 H62 M20 112 H54 M18 126 H54" stroke="#ff8a1f" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+        </svg>
         <span class="hint">${icon.bolt.replace('<svg', '<svg width="18" height="18" fill="currentColor"')} Toca aquí</span>
+      </div>
       </div>
       <div class="stomp-stats">
         <div class="stat"><b id="sSteps">0</b><span>pisadas</span></div>
@@ -284,6 +289,7 @@ export default function proyecto(root) {
 
   // ---------- PISA LA BALDOSA ----------
   const pad = $('#pad', root);
+  gsap.set(pad, { rotateX: 26 });
   let steps = 0;
   const sSteps = $('#sSteps', root), sJ = $('#sJ', root), sLed = $('#sLed', root);
   const stomp = (x, y) => {
@@ -292,8 +298,11 @@ export default function proyecto(root) {
     sSteps.textContent = fmtNum(steps);
     sJ.textContent = fmtNum(steps * 3);
     sLed.textContent = fmtNum(steps * 3, 1); // 3 J = 3 s de un LED de 1 W
-    gsap.fromTo(pad, { scale: 0.97 }, { scale: 1, duration: 0.5, ease: 'elastic.out(1,0.4)' });
-    gsap.fromTo(pad, { boxShadow: 'inset 0 0 80px rgba(46,229,157,.5), 0 0 0 6px rgba(46,229,157,.3)' }, { boxShadow: 'inset 0 0 40px rgba(46,229,157,.08), 0 0 0 6px rgba(46,229,157,.04)', duration: 0.8 });
+    gsap.fromTo(pad, { y: 7, rotateX: 26 }, { y: 0, rotateX: 26, duration: 0.55, ease: 'elastic.out(1,0.45)' });
+    const fp = pad.querySelector('.fp-print');
+    gsap.fromTo(fp, { x: x - 37, y: y - 75, rotation: gsap.utils.random(-18, 18), scale: 1.25, opacity: 1 }, { scale: 1, opacity: 0, duration: 1.1, ease: 'power2.out' });
+    const edge = '0 2px 0 #26324f, 0 4px 0 #1b2440, 0 6px 0 #141b31, 0 8px 0 #0e1426, 0 10px 0 #0a0f1d, 0 26px 40px rgba(0,0,0,.55)';
+    gsap.fromTo(pad, { boxShadow: `inset 0 1px 0 rgba(255,255,255,.18), inset 0 0 80px rgba(46,229,157,.5), ${edge}` }, { boxShadow: `inset 0 1px 0 rgba(255,255,255,.18), inset 0 0 40px rgba(46,229,157,.08), ${edge}`, duration: 0.8 });
     for (let k = 0; k < 2; k++) {
       const r = document.createElement('span');
       r.className = 'ring';
